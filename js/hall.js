@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				};
 				event.target.classList.toggle("conf-step__chair_selected");
 				let chairsSelected = Array.from(document.querySelectorAll(".conf-step__row .conf-step__chair_selected"));
+
 				if (chairsSelected.length > 0) {
 					acceptinButton.removeAttribute("disabled");
 				} else {
@@ -48,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	window.addEventListener("popstate", function () {
 		localStorage.clear();
 	});
-
 
 	acceptinButton.addEventListener("click", (event) => {
 		event.preventDefault();
@@ -73,9 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		let configurationHall = document.querySelector(".conf-step__wrapper").innerHTML;
 		selectedSeance.hallConfig = configurationHall;
 		selectedSeance.salesPlaces = selectedPlaces;
-
 		localStorage.setItem("selectedSeance", JSON.stringify(selectedSeance));
-
 		window.location.href = "payment.html";
 	});
 });
