@@ -3,7 +3,7 @@ let Request = "event=update";
 document.addEventListener("DOMContentLoaded", () => {
 	let dayNumber = document.querySelectorAll(".page-nav__day-number");
 	let dayWeek = document.querySelectorAll(".page-nav__day-week");
-	let dayWeekCatalog = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+	let dayWeekCatalog = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 	let today = new Date();
 	today.setHours(0, 0, 0);
 	for (let i = 0; i < dayNumber.length; i++) {
@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		dayWeek[i].innerHTML = `${dayWeekCatalog[day.getDay()]}`;
 		let dayLink = dayNumber[i].parentNode
 		dayLink.dataset.markTime = markTime;
-		//добавляем класс "page-nav__day_weekend" для элемента dayLink, если день недели = выходной   
-		if ((dayWeek[i].innerHTML == 'Вс') || (dayWeek[i].innerHTML == 'Сб')) {
-			dayLink.classList.add('page-nav__day_weekend');
+		//добавляем класс page-nav__day_weekend для элемента dayLink, если день недели = выходной   
+		if ((dayWeek[i].innerHTML == "Вс") || (dayWeek[i].innerHTML == "Сб")) {
+			dayLink.classList.add("page-nav__day_weekend");
 		} else {
-			dayLink.classList.remove('page-nav__day_weekend');
+			dayLink.classList.remove("page-nav__day_weekend");
 		};
 	};
 
@@ -27,13 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		subject.seances = response.seances.result;
 		subject.films = response.films.result;
 		subject.halls = response.halls.result;
-		//после фильрации залов оставляет только открытые
+		//после фильрации залов оставляем только открытые
 		subject.halls = subject.halls.filter(hall => hall.hall_open == 1);
 
 		let main = document.querySelector("main");
 
 		subject.films.forEach((film) => {
-			let seancesHTML = '';
+			let seancesHTML = "";
 			let filmId = film.film_id;
 
 			subject.halls.forEach((hall) => {
@@ -79,15 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		//обработчик события click для каждого элемента dayLinks
 		dayLinks.forEach(dayLink => dayLink.addEventListener('click', (event) => {
 			event.preventDefault();
-
 			document.querySelector(".page-nav__day_chosen").classList.remove("page-nav__day_chosen");
 			dayLink.classList.add("page-nav__day_chosen");
 
-			//получаем значение атрибута "data-markTime" целочисленного типа из элемента списка
+			//получаем значение атрибута data-markTime целочисленного типа из элемента списка
 			let markTimeDay = Number(event.target.dataset.markTime);
 			//если markTimeDay = NaN), то получаем markTimeDay из ближайшего родителя элемента с классом page-nav__day
 			if (isNaN(markTimeDay)) {
-				markTimeDay = Number(event.target.closest('.page-nav__day').dataset.markTime);
+				markTimeDay = Number(event.target.closest(".page-nav__day").dataset.markTime);
 			};
 
 			//для каждого элемента массива movieSeances
@@ -98,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				movieSeance.dataset.seanceTimeStamp = markTimeSeance;
 
 				if ((markTimeSeance - markTimeNow) > 0) {
-					movieSeance.classList.remove('acceptin-button-disabled');
+					movieSeance.classList.remove("acceptin-button-disabled");
 				} else {
-					movieSeance.classList.add('acceptin-button-disabled');
+					movieSeance.classList.add("acceptin-button-disabled");
 				};
 			});
 		}));
@@ -109,10 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		dayLinks[0].click();
 
 		//обработчик события click для каждого элемента movieSeance
-		movieSeances.forEach(movieSeance => movieSeance.addEventListener('click', (event) => {
+		movieSeances.forEach(movieSeance => movieSeance.addEventListener("click", (event) => {
 			let selectedSeance = event.target.dataset;
 			selectedSeance.hallConfig = subject.halls.find(hall => hall.hall_id == selectedSeance.hallId).hall_config;
-			localStorage.setItem('selectedSeance', JSON.stringify(selectedSeance));
+			localStorage.setItem("selectedSeance", JSON.stringify(selectedSeance));
 		}));
 	});
 });
