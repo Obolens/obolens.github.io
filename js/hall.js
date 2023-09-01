@@ -4,12 +4,12 @@ let selectedSeance = JSON.parse(localStorage.selectedSeance);
 let request = `event=get_hallConfig&timestamp=${selectedSeance.seanceTimeStamp}&hallId=${selectedSeance.hallId}&seanceId=${selectedSeance.seanceId}`;
 
 document.addEventListener("DOMContentLoaded", () => {
-	let acceptinButton = document.querySelector('.acceptin-button');
-	let buyingTitle = document.querySelector('.buying__info-title');
-	let buyingStart = document.querySelector('.buying__info-start');
-	let buyingHall = document.querySelector('.buying__info-hall');
-	let priceStandart = document.querySelector('.price-standart');
-	let confStepWrapper = document.querySelector('.conf-step__wrapper');
+	let acceptinButton = document.querySelector(".acceptin-button");
+	let buyingTitle = document.querySelector(".buying__info-title");
+	let buyingStart = document.querySelector(".buying__info-start");
+	let buyingHall = document.querySelector(".buying__info-hall");
+	let priceStandart = document.querySelector(".price-standart");
+	let confStepWrapper = document.querySelector(".conf-step__wrapper");
 
 	buyingTitle.innerHTML = selectedSeance.filmName;
 	buyingStart.innerHTML = `Начало сеанса ${selectedSeance.seanceTime}`;
@@ -23,16 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		confStepWrapper.innerHTML = selectedSeance.hallConfig;
 
-		let chairs = Array.from(document.querySelectorAll('.conf-step__row .conf-step__chair'));
+		let chairs = Array.from(document.querySelectorAll(".conf-step__row .conf-step__chair"));
 		acceptinButton.setAttribute("disabled", true);
 
 		chairs.forEach((chair) => {
-			chair.addEventListener('click', (event) => {
-				if (event.target.classList.contains('conf-step__chair_taken')) {
+			chair.addEventListener("click", (event) => {
+				if (event.target.classList.contains("conf-step__chair_taken")) {
 					return;
 				};
-				event.target.classList.toggle('conf-step__chair_selected');
-				let chairsSelected = Array.from(document.querySelectorAll('.conf-step__row .conf-step__chair_selected'));
+				event.target.classList.toggle("conf-step__chair_selected");
+				let chairsSelected = Array.from(document.querySelectorAll(".conf-step__row .conf-step__chair_selected"));
 				if (chairsSelected.length > 0) {
 					acceptinButton.removeAttribute("disabled");
 				} else {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	//очищаем localStorage при нажатии кнопки назад в браузере
-	window.addEventListener('popstate', function () {
+	window.addEventListener("popstate", function () {
 		localStorage.clear();
 	});
 
@@ -68,11 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			};
 		};
 
-		let configurationHall = document.querySelector('.conf-step__wrapper').innerHTML;
+		let configurationHall = document.querySelector(".conf-step__wrapper").innerHTML;
 		selectedSeance.hallConfig = configurationHall;
 		selectedSeance.salesPlaces = selectedPlaces;
 
-		localStorage.setItem('selectedSeance', JSON.stringify(selectedSeance));
+		localStorage.setItem("selectedSeance", JSON.stringify(selectedSeance));
 
 		window.location.href = "payment.html";
 	});
