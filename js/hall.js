@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		console.log(response)
 		if (response) {
 			selectedSeance.hallConfig = response;
+		} else {
+			console.log('Нет купленных билетов');
 		}
 		confStepWrapper.innerHTML = selectedSeance.hallConfig;
 
