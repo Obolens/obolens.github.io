@@ -4,7 +4,7 @@ let selectedSeance = JSON.parse(localStorage.selectedSeance);
 let request = `event=get_hallConfig&timestamp=${selectedSeance.seanceTimeStamp}&hallId=${selectedSeance.hallId}&seanceId=${selectedSeance.seanceId}`;
 
 document.addEventListener("DOMContentLoaded", () => {
-	let buttonAcceptin = document.querySelector('.acceptin-button');
+	let acceptinButton = document.querySelector('.acceptin-button');
 	let buyingTitle = document.querySelector('.buying__info-title');
 	let buyingStart = document.querySelector('.buying__info-start');
 	let buyingHall = document.querySelector('.buying__info-hall');
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		confStepWrapper.innerHTML = selectedSeance.hallConfig;
 
 		let chairs = Array.from(document.querySelectorAll('.conf-step__row .conf-step__chair'));
-		buttonAcceptin.setAttribute("disabled", true);
+		acceptinButton.setAttribute("disabled", true);
 
 		chairs.forEach((chair) => {
 			chair.addEventListener('click', (event) => {
@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				event.target.classList.toggle('conf-step__chair_selected');
 				let chairsSelected = Array.from(document.querySelectorAll('.conf-step__row .conf-step__chair_selected'));
 				if (chairsSelected.length > 0) {
-					buttonAcceptin.removeAttribute("disabled");
+					acceptinButton.removeAttribute("disabled");
 				} else {
-					buttonAcceptin.setAttribute("disabled", true);
+					acceptinButton.setAttribute("disabled", true);
 				};
 			});
 		});
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 
-	buttonAcceptin.addEventListener("click", (event) => {
+	acceptinButton.addEventListener("click", (event) => {
 		event.preventDefault();
 
 		let selectedPlaces = Array();
